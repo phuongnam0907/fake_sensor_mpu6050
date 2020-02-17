@@ -423,12 +423,9 @@ static int gyro_poll_thread(void *data)
 		mutex_unlock(&sensor->op_lock);
 
 		timestamp = ktime_get_boottime();
-		input_report_abs(sensor->gyro_dev, ABS_RX,
-			0);
-		input_report_abs(sensor->gyro_dev, ABS_RY,
-			123);
-		input_report_abs(sensor->gyro_dev, ABS_RZ,
-			0);
+		input_report_abs(sensor->gyro_dev, ABS_RX, 0);
+		input_report_abs(sensor->gyro_dev, ABS_RY, 0);
+		input_report_abs(sensor->gyro_dev, ABS_RZ, 4095);	//Rotate Right (4095); Rotate Left (-4096); Not Rotation (0)
 		input_event(sensor->gyro_dev,
 				EV_SYN, SYN_TIME_SEC,
 				ktime_to_timespec(timestamp).tv_sec);
@@ -465,12 +462,9 @@ static int accel_poll_thread(void *data)
 		mutex_unlock(&sensor->op_lock);
 
 		timestamp = ktime_get_boottime();
-		input_report_abs(sensor->accel_dev, ABS_X,
-			5000);
-		input_report_abs(sensor->accel_dev, ABS_Y,
-			6000);
-		input_report_abs(sensor->accel_dev, ABS_Z,
-			921);
+		input_report_abs(sensor->accel_dev, ABS_X, 0);	//UP(0); 	 DOWN(0); 		LEFT(16383); RIGHT(-16384)
+		input_report_abs(sensor->accel_dev, ABS_Y, -16384);	//UP(16383); DOWN(-16384);  LEFT(0); 	 RIGHT(0)
+		input_report_abs(sensor->accel_dev, ABS_Z, 0);
 		input_event(sensor->accel_dev,
 				EV_SYN, SYN_TIME_SEC,
 				ktime_to_timespec(timestamp).tv_sec);
