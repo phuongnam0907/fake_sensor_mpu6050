@@ -6,8 +6,8 @@
 
 ```
 &i2c_1 {
-	mpu6050@68 {
-		compatible = "invn,mpu6050";
+	fake6050@68 {
+		compatible = "invn,fake6050";
 		reg = <0x68>;
 		invn,place = "Portrait Down";
 	};
@@ -36,6 +36,6 @@ obj-$(CONFIG_SENSORS_FAKE6050)		+= fake6050.o
 4. Defconfig
 
 ```
-#9. fake sensor mpu6050 - combo accel and gyro
+#10. fake sensor mpu6050 - combo accel and gyro
 CONFIG_SENSORS_FAKE6050=y
 ```
